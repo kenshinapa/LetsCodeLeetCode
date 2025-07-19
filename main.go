@@ -3,22 +3,16 @@ package main
 import (
 	"fmt"
 
-	rs "github.com/kenshinapa/LetsCodeLeetCode/remove-subdirectories"
+	b "github.com/kenshinapa/LetsCodeLeetCode/find-unique-binary-string"
 )
 
 func main() {
 	data := []string{
-		"/a/b",
-		"/a",
-		"/a/b/c",
-		"/ax/b",
-		"/c/d",
-		"/c/d/e",
-		"/c",
-		"/c/f",
-		"/d/d/d",
+		"001",
+		"011",
+		"100",
 	}
-	result := rs.RemoveSubfolders(data)
+	result := b.FindDifferentBinaryString(data)
 
 	fmt.Println("Result:", result)
 }
