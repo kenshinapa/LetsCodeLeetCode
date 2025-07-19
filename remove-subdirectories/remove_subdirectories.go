@@ -11,23 +11,30 @@ package removesubdirectories
 func RemoveSubfolders(folder []string) []string { //
 	folderMap := make(map[string]struct{})
 	for _, f := range folder {
-		folderMap[f] = struct{}{}
+		folderMap[f] = struct{}{} // Initialize the map with all folders
 	}
 
 	var result []string
 
 	for _, f := range folder {
-		isSubfolder := false
+		_, ok := folderMap[f]
+		if !ok {
+			continue
+		}
 
-		for other := range folderMap {
-			if f != other && len(f) < len(other) && f == other[:len(f)] {
-				isSubfolder = true
-				break
+		for fm := range folderMap { // Possible subfolder
+			if f == fm {
+				continue
+			}
+
+			if len(fm) > len(f) && fm[:len(f)] == f && fm[len(f)] == '/' {
+				delete(folderMap, fm)
 			}
 		}
-		if !isSubfolder {
-			result = append(result, f)
-		}
+	}
+
+	for f := range folderMap { // Iterate through the map to collect valid folders
+		result = append(result, f)
 	}
 
 	return result
