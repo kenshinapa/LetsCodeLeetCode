@@ -21,12 +21,12 @@ func TwoSum(nums []int, target int) []int {
 // output: [0, 3]
 
 func twoSumRecursive(nums []int, target int, index int, visited map[int]int) []int {
-	complement := target - nums[index]
-	if idx, found := visited[complement]; found {
+	complement := target - nums[index]            // 2 = 9 - 7 | index 1: -2 = 9 - 11 | index 2: -6 = 9 - 15 | index 3: 7 = 9 - 2
+	if idx, found := visited[complement]; found { // first, visited is empty
 		return []int{idx, index}
 	}
 
-	visited[nums[index]] = index
+	visited[nums[index]] = index // visited: {7: 0} | {7: 0, 11: 1} | {7: 0, 11: 1, 15: 2} | {7: 0, 11: 1, 15: 2, 2: 3}
 
 	return twoSumRecursive(nums, target, index+1, visited)
 }
