@@ -24,7 +24,7 @@ package findelementsincontaminatedbtree
 //	}
 type FindElements struct {
 	root    *TreeNode
-	visited map[int]bool // To keep track of visited nodes
+	visited map[int]struct{} // To keep track of visited nodes
 }
 
 // TreeNode - Definition for a binary tree node. I guess this is already implemented in the platform.
@@ -37,7 +37,7 @@ type TreeNode struct {
 func Constructor(root *TreeNode) FindElements {
 	fe := FindElements{
 		root:    root,
-		visited: make(map[int]bool),
+		visited: make(map[int]struct{}),
 	}
 
 	fe.recoverTree(root, 0)
@@ -51,7 +51,7 @@ func (this *FindElements) recoverTree(node *TreeNode, value int) {
 	}
 
 	node.Val = value
-	this.visited[value] = true
+	this.visited[value] = struct{}{}
 
 	this.recoverTree(node.Left, 2*value+1)
 	this.recoverTree(node.Right, 2*value+2)
