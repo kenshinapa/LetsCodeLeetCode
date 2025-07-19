@@ -3,42 +3,25 @@ package main
 import (
 	"fmt"
 
-	f "github.com/kenshinapa/LetsCodeLeetCode/find-elements-in-contaminated-b-tree"
+	t "github.com/kenshinapa/LetsCodeLeetCode/regular-binary-tree"
 )
 
 func main() {
-	tree := f.Constructor(&f.TreeNode{
-		Val: -1,
-		Right: &f.TreeNode{
-			Val: -1,
-		},
-	})
+	tree := t.NewRegularBinaryTree(&t.TreeNode{Val: 10})
 
-	searchOne := tree.Find(1) // Should return false
-	searchTwo := tree.Find(2) // Should return true
+	tree.Insert(5)
+	tree.Insert(15)
+	tree.Insert(3)
+	tree.Insert(7)
+	tree.Insert(12)
+	tree.Insert(18)
+	tree.Insert(1)
+	tree.Insert(0)
+	tree.Insert(8)
+	tree.InsertAndBalance(20)
 
-	fmt.Println("All searches for tree 1 are:", searchOne, searchTwo) // Should return false, true
+	tree.Delete(5)
 
-	tree2 := f.Constructor(&f.TreeNode{
-		Val: -1,
-		Left: &f.TreeNode{
-			Val: -1,
-			Left: &f.TreeNode{
-				Val: -1,
-			},
-			Right: &f.TreeNode{
-				Val: -1,
-			},
-		},
-		Right: &f.TreeNode{
-			Val: -1,
-		},
-	})
-
-	// 1, 3, 5
-	searchOne = tree2.Find(1)    // Should return true
-	searchThree := tree2.Find(3) // Should return true
-	searchFive := tree2.Find(5)  // Should return false
-
-	fmt.Printf("All seaches for tree 2 are: %v, %v, %v\n", searchOne, searchThree, searchFive) // Should return true, false, true
+	fmt.Println(tree.PrettyPrint())
+	fmt.Println(tree.IsBalanced())
 }
