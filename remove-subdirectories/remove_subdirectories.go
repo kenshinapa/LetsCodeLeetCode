@@ -18,16 +18,15 @@ func RemoveSubfolders(folder []string) []string { //
 		return nil
 	}
 
-	sorted := make([]string, len(folder))
-	copy(sorted, folder)
-	// Sort lexicographically
-	sort.Strings(sorted)
+	sort.Strings(folder)
 
 	var result []string
-	for i, f := range sorted {
+
+	for i, f := range folder {
 		if i == 0 || !strings.HasPrefix(f, result[len(result)-1]+"/") {
 			result = append(result, f)
 		}
 	}
+
 	return result
 }
