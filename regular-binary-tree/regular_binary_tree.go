@@ -13,7 +13,7 @@ type RegularBinaryTree struct {
 	root *TreeNode
 }
 
-func (rbt *RegularBinaryTree) String() string {
+func (rbt *RegularBinaryTree) JsonString() string {
 	if rbt.root == nil {
 		return "Empty Tree"
 	}
@@ -27,44 +27,6 @@ func (rbt *RegularBinaryTree) jsonString(node *TreeNode) string {
 	}
 
 	return "{\"Val\": " + strconv.FormatInt(node.Val, 10) + ", \"Left\": " + rbt.jsonString(node.Left) + ", \"Right\": " + rbt.jsonString(node.Right) + "}"
-}
-
-func (rbt *RegularBinaryTree) levelOrderString() string {
-	var result string
-
-	queue := []*TreeNode{rbt.root}
-
-	for len(queue) > 0 {
-		nextQueue := []*TreeNode{}
-		layer := ""
-
-		for _, node := range queue {
-			if node != nil {
-				layer += strconv.FormatInt(node.Val, 10) + " "
-				nextQueue = append(nextQueue, node.Left, node.Right)
-			} else {
-				layer += "_ "
-			}
-		}
-
-		result += layer[:len(layer)-1] + "\n" // Remove trailing space, add newline
-		allNil := true
-
-		for _, n := range nextQueue {
-			if n != nil {
-				allNil = false
-				break
-			}
-		}
-
-		if allNil {
-			break
-		}
-
-		queue = nextQueue
-	}
-
-	return result
 }
 
 func NewRegularBinaryTree(root *TreeNode) *RegularBinaryTree {
