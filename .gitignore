@@ -1,0 +1,16 @@
+# VS Code config files
+.vscode/
+
+# Jetbrains IDE config files
+.idea/
+
+# Generic files and directories to include in .gitignore
+.DS_Store
+.env
+
+# Golang binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
