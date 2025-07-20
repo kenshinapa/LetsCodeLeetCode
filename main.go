@@ -3,49 +3,21 @@ package main
 import (
 	"fmt"
 
-	add "github.com/kenshinapa/LetsCodeLeetCode/add-two-numbers"
+	f "github.com/kenshinapa/LetsCodeLeetCode/delete-duplicate-folders-in-system"
 )
 
 func main() {
-	result := add.AddTwoNumbers(&add.ListNode{
-		Val: 9,
-		Next: &add.ListNode{
-			Val: 9,
-			Next: &add.ListNode{
-				Val: 9,
-				Next: &add.ListNode{
-					Val: 9,
-				},
-			},
-		},
-	}, &add.ListNode{
-		Val: 9,
-		Next: &add.ListNode{
-			Val: 9,
-			Next: &add.ListNode{
-				Val: 9,
-				Next: &add.ListNode{
-					Val: 9,
-				},
-			},
-		},
-	}) // Output: 8 -> 9 -> 9 -> 9 -> 1
+	// Example input [["a"],["c"],["a","b"],["c","b"],["a","b","x"],["a","b","x","y"],["w"],["w","y"]]
+	result := f.DeleteDuplicateFolder([][]string{
+		{"a"},
+		{"c"},
+		{"a", "b"},
+		{"c", "b"},
+		{"a", "b", "x"},
+		{"a", "b", "x", "y"},
+		{"r", "w"},
+		{"r", "w", "y"},
+	})
 
-	fmt.Println("Result of AddTwoNumbers:")
-
-	// Print first value
-	fmt.Printf("%d", result.Val)
-	if result.Next != nil {
-		fmt.Print(" -> ")
-	}
-
-	n := result.Next
-
-	for n != nil {
-		fmt.Print(n.Val)
-		if n.Next != nil {
-			fmt.Print(" -> ")
-		}
-		n = n.Next
-	}
+	fmt.Println(result)
 }
