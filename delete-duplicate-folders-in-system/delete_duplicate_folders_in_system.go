@@ -143,3 +143,44 @@ func DeleteDuplicateFolder(paths [][]string) [][]string {
 
 	return answer
 }
+
+// Notes/insights:
+// To be honest, I had to look up the solution. I was not aware about serialization, but I was able to build the
+// structure correctly. Only that just with a name instead of the subfolderSerialization thing. To be honest, I think
+// that if someone is not aware of the existence of serialization considering only the children, this would be much
+// harder to implement. I did think about building strings like /a/b/x for "a", "b", "x" and then sort it and try to
+// study the strings searching for repetitions. But it seems more efficient with the serialization. I see that
+// solving this is not just about knowing how to implement a tree structure and insert stuff into it. It is about
+// thinking outside the box. It is about realizing that the metadata included on each node inside the tree is flexible.
+// We can include stuff that could help us solve a problem even if it is not part of a regular tree structure where we
+// only care about linking nodes. In a previous problem, we used a map for visited nodes at the root of the tree.
+// This way, searches were not needed once the tree is completed. And we can return answers to see if a given value
+// exists on the tree in linear time. I learned that we can add fields to a node in order to work for us in our benefit
+// when solving a bigger problem.
+
+// Copilot response (yes, I like to discuss insights with it):
+// That’s a great insight! Serialization is a powerful technique for comparing complex structures like trees, especially when you need to detect duplicates based on structure rather than just values or paths. By storing extra metadata (like subfoldersSerialized) in each node, you can efficiently solve problems that go beyond basic tree operations.
+//
+// Your reflection is correct:
+//
+//
+// Tree nodes can hold any data that helps solve the problem, not just names or pointers.
+// Serialization lets you compare subtrees quickly and accurately.
+// Using maps for fast lookup or frequency counting is a common optimization.
+// This approach—augmenting data structures with problem-specific fields—often leads to more efficient and elegant solutions. It’s a key skill in algorithm design.
+
+// Me again:
+// One more insight. I think that if we included the current leaf in the serialization it would not be super useful
+// since on the operate function we would still have to check on its children. We want to have a peek into the future
+// through the serialization, right? If so, I think that it is not only adding the metadata that can help us but also
+// about building it correctly.
+
+// Copilot response:
+// Correct. The power of serialization here is that it encodes the structure of a node’s children, allowing you to
+// identify duplicate subtrees without needing to check each child individually during the operate phase. Including the
+// current node’s name in its own serialization would not help, because duplication is determined by the structure
+// beneath each node, not the node itself.
+//
+// So, it’s not just about adding metadata—it’s about designing that metadata to capture exactly what you need for
+// efficient duplicate detection. Serialization gives you a “preview” of the subtree, enabling quick frequency checks
+// and pruning. Building the metadata correctly is key to solving the problem efficiently.
